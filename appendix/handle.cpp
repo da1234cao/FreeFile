@@ -1,6 +1,6 @@
 // code form: https://github.com/yihleego/handle-tools
 
-// 这似乎并不是一个好程序，会将系统跑死机
+// 杩欎技涔庡苟涓嶆槸涓�涓ソ绋嬪簭锛屼細灏嗙郴缁熻窇姝绘満
 
 #include <windows.h>
 #include <ntstatus.h>

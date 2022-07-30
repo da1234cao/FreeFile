@@ -1,0 +1,10 @@
+﻿# TOML中的单引号是文字常量，不允许转义
+
+# handle.exe文件路径
+handle = '.\handle.exe'
+
+# 被进程占用的文件路径
+freeFiles = ['D:\cmake', 'E:\tmp.txt']
+
+# 运行过程中生成内容路径
+tmpfile = '.\output.txt'

@@ -1,5 +1,4 @@
-﻿// deleteFile.cpp: 定义应用程序的入口点。
-//
+﻿// 占用文件示例
 
 #include <boost/filesystem.hpp>
 #include <iostream>

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "exception.hpp"
 #include "winutils.hpp"
@@ -32,7 +32,7 @@ private:
 private:
 	string exefile_;
 	string tmpfile_;
-	vector<tuple<string, int, HANDLE, string>> files_info_; // Õ¼ÓÃÎÄ¼şµÄ³ÌĞòÃû£¬³ÌĞòµÄpid, ÎÄ¼şµÄ¾ä±ú£¬ÎÄ¼şÃû
+	vector<tuple<string, int, HANDLE, string>> files_info_; // å ç”¨æ–‡ä»¶çš„ç¨‹åºåï¼Œç¨‹åºçš„pid, æ–‡ä»¶çš„å¥æŸ„ï¼Œæ–‡ä»¶å
 	set<int> files_pid_;
 };
 
@@ -55,7 +55,7 @@ enumFile::enumFile(const string& exe, const string& tmpfile)
 
 void enumFile::gen_file_info(const string& file)
 {
-	// ÌáÈ¡¸ñÊ½£ºhandle.exe   pid: 22432  type: File       A0: E:\code\FreeFile\bin\output.txt
+	// æå–æ ¼å¼ï¼šhandle.exe   pid: 22432  type: File       A0: E:\code\FreeFile\bin\output.txt
 	waitExecuteToFile(exefile_, file, tmpfile_);
 	ifstream input_file(tmpfile_);
 	string info;
@@ -67,7 +67,7 @@ void enumFile::gen_file_info(const string& file)
 		stringstream ss(info);
 		ss >> pro_name;
 		if (!isExeTail(pro_name)) {
-			continue; // Õâ¸ö¼ì²é´æÔÚÈ±Ïİ£¬×îºÃ±éÀú²é¿´ÏÂÓĞÃ»ÓĞÕâ¸ö½ø³Ì
+			continue; // è¿™ä¸ªæ£€æŸ¥å­˜åœ¨ç¼ºé™·ï¼Œæœ€å¥½éå†æŸ¥çœ‹ä¸‹æœ‰æ²¡æœ‰è¿™ä¸ªè¿›ç¨‹
 		}
 		string flag_str;
 		while (ss >> flag_str) {
@@ -108,7 +108,7 @@ bool enumFile::isExeTail(string file_name)
 		return false;
 	}
 	transform(file_name.begin(), file_name.end(), file_name.begin(), tolower);
-	for (int loop = 3, i = file_name.size() - 1; loop >= 0; loop--, i--) {
+	for (int loop = 3, i = (int)file_name.size() - 1; loop >= 0; loop--, i--) {
 		if (file_name[i] != tail_format[loop]) {
 			retval = false;
 			break;

@@ -5,7 +5,7 @@
 #include <sstream>
 #include <iostream>
 
-// ²»¿¼ÂÇÂ·¾¶»òÕß²ÎÊı¿ÉÄÜ´æÔÚÖĞÎÄµÄÇé¿ö
+// ä¸è€ƒè™‘è·¯å¾„æˆ–è€…å‚æ•°å¯èƒ½å­˜åœ¨ä¸­æ–‡çš„æƒ…å†µ
 
 std::string get_temp_path(void)
 {
@@ -32,14 +32,14 @@ std::string get_temp_path(void)
 
 int waitExecuteToFile(const std::string& executor, std::string arg, std::string outfile)
 {
-	// µÈ´ıexecutor arg Ö´ĞĞ½áÊø; ¸üºÃµÄĞ´·¨ÊÇ£¬½«Ö´ĞĞºÍµÈ´ı·ÖÀë£»
-	// ·ÖÀëµÄĞ´·¨£¬ÒâÎ¶Òª´«µİPROCESS_INFORMATION¡£Èç¹û²»ÏëÖ±½ÓÊ¹ÓÃÕâ¸ö²»ÊìÏ¤µÄÀàĞÍ£¬¿ÉÒÔ°ÑËûÃÇ·â×°
+	// ç­‰å¾…executor arg æ‰§è¡Œç»“æŸ; æ›´å¥½çš„å†™æ³•æ˜¯ï¼Œå°†æ‰§è¡Œå’Œç­‰å¾…åˆ†ç¦»ï¼›
+	// åˆ†ç¦»çš„å†™æ³•ï¼Œæ„å‘³è¦ä¼ é€’PROCESS_INFORMATIONã€‚å¦‚æœä¸æƒ³ç›´æ¥ä½¿ç”¨è¿™ä¸ªä¸ç†Ÿæ‚‰çš„ç±»å‹ï¼Œå¯ä»¥æŠŠä»–ä»¬å°è£…
 
-	// ×éºÏ²ÎÊı
+	// ç»„åˆå‚æ•°
 	std::ostringstream oss;
 	oss << executor << ' ' <<  arg;
 
-	//´´½¨ÎÄ¼ş£¬ÓÃÓÚ±£´æÖØ¶¨ÏòÊä³ö
+	//åˆ›å»ºæ–‡ä»¶ï¼Œç”¨äºä¿å­˜é‡å®šå‘è¾“å‡º
 	SECURITY_ATTRIBUTES sa;
 	sa.nLength = sizeof(sa);
 	sa.lpSecurityDescriptor = NULL;
@@ -56,22 +56,22 @@ int waitExecuteToFile(const std::string& executor, std::string arg, std::string 
 	ZeroMemory(&startup_info, sizeof(startup_info));
 	PROCESS_INFORMATION process_info; 
 	ZeroMemory(&process_info, sizeof(process_info));
-	//½«ÎÄ¼ş¾ä±ú´«µİ¸ø×Ó½ø³Ì£¬×÷Îª×Ó½ø³ÌµÄ±ê×¼Êä³ö£¬±ê×¼´íÎóÉèÖÃ
+	//å°†æ–‡ä»¶å¥æŸ„ä¼ é€’ç»™å­è¿›ç¨‹ï¼Œä½œä¸ºå­è¿›ç¨‹çš„æ ‡å‡†è¾“å‡ºï¼Œæ ‡å‡†é”™è¯¯è®¾ç½®
 	startup_info.cb = sizeof(STARTUPINFOA);
 	startup_info.dwFlags |= STARTF_USESTDHANDLES;
 	startup_info.hStdInput = NULL;
 	startup_info.hStdError = outfile_handle;
 	startup_info.hStdOutput = outfile_handle;
 
-	// Ö´ĞĞ³ÌĞò
+	// æ‰§è¡Œç¨‹åº
 	std::cout << "execute cmd is: " << oss.str() << std::endl;
 	int ret = CreateProcess(NULL, const_cast<LPSTR>(oss.str().c_str()), NULL, NULL, TRUE, NULL, NULL, NULL, &startup_info, &process_info);
 	if (ret == 0) {
-		// »ñÈ¡´íÎóÏûÏ¢
+		// è·å–é”™è¯¯æ¶ˆæ¯
 		return 0;
 	}
 
-	// µÈ´ıÖ´ĞĞ½áÊø
+	// ç­‰å¾…æ‰§è¡Œç»“æŸ
 	if (ret) {
 		WaitForSingleObject(process_info.hProcess, INFINITE);
 		CloseHandle(process_info.hProcess);

@@ -3,5 +3,3 @@ Nthandle v4.22 - Handle viewer
 Copyright (C) 1997-2019 Mark Russinovich
 Sysinternals - www.sysinternals.com
 
-explorer.exe       pid: 1684   type: File          3A74: D:\cmake
-explorer.exe       pid: 1684   type: File          3BFC: D:\cmake
