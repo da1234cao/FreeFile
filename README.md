@@ -1,16 +1,16 @@
-## ���߽���
-windows�£�ɱ��ռ���ļ��Ľ��̡�һЩ����ϸ���ĵ������Բο�docĿ¼��
+## 工具介绍
+windows下，杀死占用文件的进程。一些更详细的文档，可以参考[doc](doc)目录。
 
-## ����ǰ��׼������
-* ��������[handle.exe](https://docs.microsoft.com/en-us/sysinternals/downloads/handle)������ռ���ļ����̵�pid�����ֿ����MITЭ�顣����Э��ԭ����Ҫ�û��ֶ����ؽ�ѹhandle.exe��binĿ¼��
-* ��������[Boost Library](https://www.boost.org/)��
+## 编译前的准备工作
+* 代码依赖[handle.exe](https://docs.microsoft.com/en-us/sysinternals/downloads/handle)来查找占用文件进程的pid。本仓库采用MIT协议。由于协议原因，需要用户手动下载解压handle.exe到bin目录。
+* 代码依赖[Boost Library](https://www.boost.org/)。
 
-## ����
+## 进度
 
-- [x] �������ܣ�����ռ���ļ����̵�pid��ͨ��pidɱ�����̣�
-- [x] ͨ�������ļ���ȡ��ռ���ļ�·����
-- [ ] ��־��¼
-- [ ] ��ʵ�֣�������Ż���
-    * ���ҵĹ��̱�����Ŀǰÿ�β���һ���ļ�����һ�Ρ�Ӧ���������е��ļ�ֻ��Ҫ����һ�Ρ�handle.exe��Դ��û�й��������ý����
-    * �����������д���֮������ͼ�λ����棬��������һ��Ŀ¼���г���ռ�õ��ļ�����ռ���ļ����̵���Ϣ������ѡ�Ĺر���Щ���̡�
-    * �ڹر�ռ���ļ����̵Ļ����ϣ���������չǿ��ɾ�����ܡ���ɱ��ռ���ļ��Ľ��̣���ɾ���ļ���
+- [x] 基本功能：查找占用文件进程的pid；通过pid杀死进程；
+- [x] 通过配置文件读取被占用文件路径。
+- [ ] 日志记录
+- [ ] 不实现：整体的优化。
+    * 查找的过程遍历。目前每次查找一个文件遍历一次。应当查找所有的文件只需要遍历一次。handle.exe的源码没有公开，不好借鉴。
+    * 在完善命令行代码之后，添加图形化界面，可以搜索一个目录，列出被占用的文件，与占用文件进程的信息，并可选的关闭这些进程。
+    * 在关闭占用文件进程的基础上，很容易拓展强制删除功能。先杀死占用文件的进程，再删除文件。

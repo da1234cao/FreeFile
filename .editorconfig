@@ -1,0 +1,8 @@
+# https://editorconfig.org/
+# https://docs.microsoft.com/en-us/visualstudio/ide/create-portable-custom-editor-options?view=vs-2022
+# https://stackoverflow.com/questions/55781685/how-to-get-clang-format-working-in-visual-studio
+
+root = true
+
+[*]
+charset = utf-8

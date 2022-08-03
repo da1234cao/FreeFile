@@ -1,4 +1,4 @@
-﻿# TOML中的单引号是文字常量，不允许转义
+# TOML中的单引号是文字常量，不允许转义
 
 # handle.exe文件路径
 handle = '.\handle.exe'
@@ -8,3 +8,10 @@ freeFiles = ['D:\cmake', 'E:\tmp.txt']
 
 # 运行过程中生成内容路径
 tmpfile = '.\output.txt'
+
+# 日志文件
+[log]
+path = '.\freeFile.log'
+level = 'trace'
+max_file_size = 1 # MB单位
+max_files = 3

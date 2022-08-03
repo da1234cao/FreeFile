@@ -1,7 +1,8 @@
-﻿#pragma once
+#pragma once
 
 #include "exception.hpp"
 #include "winutils.hpp"
+#include "log.hpp"
 #include <boost/filesystem.hpp>
 #include <string>
 #include <map>
@@ -11,10 +12,11 @@
 #include <set>
 
 namespace freeFile {
-using namespace std;
+// 不要这样使用using
+using namespace std; 
 using namespace boost::filesystem;
 
-struct enum_execption : virtual base_exception {};;
+struct enum_execption : virtual base_exception {};
 
 class enumFile {
 public:
@@ -38,6 +40,7 @@ private:
 
 enumFile::enumFile(const string& exe, const string& tmpfile)
 {
+	Log::LOG_DEBUG("construction the enumFile class");
 	path exe_path(exe);
 	if (!exists(exe_path)) {
 		BOOST_THROW_EXCEPTION(enum_execption() 
@@ -51,6 +54,8 @@ enumFile::enumFile(const string& exe, const string& tmpfile)
 	} else {
 		tmpfile_ = tmpfile;
 	}
+	Log::LOG_DEBUG("handle process is: " + exefile_);
+	Log::LOG_DEBUG("tmp file is: " + tmpfile_);
 }
 
 void enumFile::gen_file_info(const string& file)
@@ -86,6 +91,7 @@ void enumFile::gen_file_info(const string& file)
 
 void enumFile::gen_files_info(set<string>&files)
 {
+	Log::LOG_DEBUG("begin to gen file info.");
 	for (auto file : files) {
 		gen_file_info(file);
 	}
@@ -126,6 +132,7 @@ void enumFile::get_files_pid()
 
 void enumFile::freeFiles()
 {
+	Log::LOG_DEBUG("begin to free file.");
 	get_files_pid();
 	for (int pid : files_pid_) {
 		close_process(pid);
